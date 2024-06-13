@@ -17,7 +17,7 @@ public class SmartformApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         kopidlnoService.fetchAndStoreData();
     }
 

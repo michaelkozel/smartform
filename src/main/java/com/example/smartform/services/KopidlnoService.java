@@ -75,13 +75,12 @@ public class KopidlnoService {
     private Document prepareDocument() throws Exception {
         URL url = new URL("https://www.smartform.cz/download/kopidlno.xml.zip");
 
-        InputStream inputStream = new ZipInputStream(url.openStream());
-        ZipInputStream zipStream = (ZipInputStream) inputStream;
-        ZipEntry entry = zipStream.getNextEntry();
+        ZipInputStream inputStream = new ZipInputStream(url.openStream());
+        ZipEntry entry = inputStream.getNextEntry();
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(zipStream);
+        Document doc = dBuilder.parse(inputStream);
 
         doc.getDocumentElement().normalize();
         return doc;
