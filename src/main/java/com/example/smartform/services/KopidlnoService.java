@@ -79,7 +79,7 @@ public class KopidlnoService {
     }
 
     public void fetchAndStoreData() {
-        Document doc = null;
+        Document doc;
         try {
             doc = prepareDocument();
         } catch (Exception e) {
