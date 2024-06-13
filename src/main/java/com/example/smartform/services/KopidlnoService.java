@@ -13,9 +13,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 @Service
@@ -48,25 +46,19 @@ public class KopidlnoService {
     private void fetchVillageParts(Document doc) {
         NodeList villageParts = doc.getElementsByTagName("vf:CastObce");
         for (int j = 0; j < villageParts.getLength(); j++) {
-            Node castNode = villageParts.item(j);
-            if (castNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element castElement = (Element) castNode;
-                String villagePartCode = castElement.getElementsByTagName("coi:Kod").item(0).getTextContent();
-                String villagePartName = castElement.getElementsByTagName("coi:Nazev").item(0).getTextContent();
-
-
+            Node villagePartNode = villageParts.item(j);
+            if (villagePartNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element villagePartElement = (Element) villagePartNode;
+                String villagePartCode = villagePartElement.getElementsByTagName("coi:Kod").item(0).getTextContent().trim();
+                String villagePartName = villagePartElement.getElementsByTagName("coi:Nazev").item(0).getTextContent().trim();
                 VillagePart villagePart = new VillagePart();
                 villagePart.setCode(villagePartCode);
                 villagePart.setVillagePartName(villagePartName);
 
-
-                NodeList obecList = castElement.getElementsByTagName("coi:Obec");
-                Node obecNode = obecList.item(0);
-                String kodObec = obecNode.getTextContent();
-                System.out.println(kodObec);
-
-                villagePart.setVillageCode(kodObec);
-
+                NodeList villageList = villagePartElement.getElementsByTagName("coi:Obec");
+                Node villageNode = villageList.item(0);
+                String villageCode = villageNode.getTextContent().trim();
+                villagePart.setVillageCode(villageCode);
                 villagePartRepository.save(villagePart);
             }
         }
@@ -76,7 +68,7 @@ public class KopidlnoService {
         URL url = new URL("https://www.smartform.cz/download/kopidlno.xml.zip");
 
         ZipInputStream inputStream = new ZipInputStream(url.openStream());
-        ZipEntry entry = inputStream.getNextEntry();
+        inputStream.getNextEntry();
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
