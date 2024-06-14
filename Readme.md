@@ -21,3 +21,6 @@ The application utilizes DOM for XML parsing and Hibernate for ORM.
 # Docker
 - Install docker and docker compose
 - run deploy.sh
+
+Enjoy
+![harold](img/harold.jpeg "Harold")
