@@ -17,3 +17,7 @@ The application utilizes DOM for XML parsing and Hibernate for ORM.
 - Java 8 or higher
 - Maven
 - PostgreSQL
+
+# Docker
+- Install docker and docker compose
+- run deploy.sh
