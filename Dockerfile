@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
-WORKDIR /app
-COPY build/libs/smartform.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM openjdk:22-ea-28-jdk
+ARG JAR_FILE=build/libs/smartform.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","app.jar"]

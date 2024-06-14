@@ -1,7 +1,5 @@
 #!/bin/bash
 
-JAR_NAME="smartform.jar"
-
 IMAGE_NAME="smartform"
 
 echo "Building the project..."
@@ -21,7 +19,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Starting Docker Compose..."
-docker-compose up -d
+docker-compose up -d --build --force-recreate
 
 # Kontrola, zda Docker Compose byl spuštěn úspěšně
 if [ $? -ne 0 ]; then

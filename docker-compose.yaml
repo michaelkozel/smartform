@@ -8,10 +8,13 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:1234/postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/smartform
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
     expose:
       - 8080
     ports:
@@ -25,8 +28,8 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=smartform
     expose:
-      - 1234
+      - 5432
     ports:
-        - '1234:5432'
+        - '5432:5432'
 networks:
   default:
